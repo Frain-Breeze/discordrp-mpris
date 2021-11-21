@@ -290,7 +290,7 @@ def main() -> int:
         return loop.run_until_complete(main_task)
     except BaseException as e:
         main_task.cancel()
-        wait_task = asyncio.wait_for(main_task, 5, loop)
+        wait_task = asyncio.wait_for(main_task, 5)
         try:
             loop.run_until_complete(wait_task)
         except asyncio.CancelledError:

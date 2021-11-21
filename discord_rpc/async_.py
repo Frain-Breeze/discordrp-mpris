@@ -89,6 +89,9 @@ class AsyncDiscordRpc(metaclass=ABCMeta):
                 if ret_data == {'message': "Cannot read property 'id' of undefined"}:
                     await asyncio.sleep(0.3)
                     continue
+                if ret_op == 1000:
+                    await asyncio.sleep(5)
+                    continue
                 if ret_op == OP_CLOSE:
                     await self.close()
                 raise RuntimeError(ret_data)
