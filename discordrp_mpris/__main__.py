@@ -119,12 +119,19 @@ class DiscordMpris:
         replacements['state'] = state
 
         # TODO pref
-        if replacements['artist']:
-            # details_fmt = "{artist} - {title}"
-            details_fmt = "{title}\nby {artist}"
-        else:
-            details_fmt = "{title}"
+        #if replacements['artist']:
+        #    # details_fmt = "{artist} - {title}"
+        #    details_fmt = "{title}\nby {artist}"
+        #else:
+        #    details_fmt = "{title}"
+        #activity['details'] = self.format_details(details_fmt, replacements)
+
+        details_fmt = "{title}"
         activity['details'] = self.format_details(details_fmt, replacements)
+
+        if replacements['artist']:
+            details_fmt = "by {artist}"
+        activity['state'] = self.format_details(details_fmt, replacements)
 
         # set state and timestamps
         activity['timestamps'] = {}
@@ -136,11 +143,11 @@ class DiscordMpris:
             elif show_time == 'remaining':
                 end_time = start_time + (length / 1e6)
                 activity['timestamps']['end'] = end_time
-            activity['state'] = self.format_details("{state} [{length}]", replacements)
-        elif state == PlaybackStatus.PAUSED:
-            activity['state'] = self.format_details("{state} [{position}/{length}]", replacements)
-        else:
-            activity['state'] = self.format_details("{state}", replacements)
+        #    activity['state'] = self.format_details("{state} [{length}]", replacements)
+        #elif state == PlaybackStatus.PAUSED:
+        #    activity['state'] = self.format_details("{state} [{position}/{length}]", replacements)
+        #else:
+        #    activity['state'] = self.format_details("{state}", replacements)
 
         # set icons and hover texts
         if player.name in PLAYER_ICONS:
